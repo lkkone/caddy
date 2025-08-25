@@ -3,21 +3,28 @@ www.caonmd.com {
 }
 
 caonmd.com {
-  # 先处理 /home 全部路径
-  @home path /home*
-  handle @home {
-    uri strip_prefix /home
+  # ① 先把 /home 精确路径重定向到 /home/（否则相对资源会 404）
+  @home_exact path /home
+  redir @home_exact /home/ 301
+
+  # ② 处理 /home 及其子路径，并在转发前自动去掉 /home 前缀
+  handle_path /home* {
     reverse_proxy 10.24.0.3:8080
   }
 
-  # 其他所有路径走欢迎页(8070)
+  # ③ 其余路径全部走欢迎页（8070）
   handle {
     reverse_proxy 10.24.0.3:8070
   }
 
-  # 防混合内容（可选但推荐）
+  # 可选：把 http 资源升级为 https，避免混合内容
   header {
     Content-Security-Policy "upgrade-insecure-requests"
+  }
+
+  # 可选：开访问日志方便排查
+  log {
+    output file /data/access.log
   }
 }
 
