@@ -1,20 +1,26 @@
 www.caonmd.com {
-    redir https://caonmd.com{uri} permanent
+  redir https://caonmd.com{uri} permanent
 }
 
 caonmd.com {
-    # 根路径代理到 8070 端口
-    handle / {
-        reverse_proxy 10.24.0.3:8070
-    }
+  # 先处理 /home 全部路径
+  @home path /home*
+  handle @home {
+    uri strip_prefix /home
+    reverse_proxy 10.24.0.3:8080
+  }
 
-    # /home 路径代理到 8080 端口
-    handle /home {
-        reverse_proxy 10.24.0.3:8080
-    }
+  # 其他所有路径走欢迎页(8070)
+  handle {
+    reverse_proxy 10.24.0.3:8070
+  }
+
+  # 防混合内容（可选但推荐）
+  header {
+    Content-Security-Policy "upgrade-insecure-requests"
+  }
 }
 
 blog.caonmd.com {
-    # blog 子域名代理到 8090 端口
-    reverse_proxy 10.24.0.3:8090
+  reverse_proxy 10.24.0.3:8090
 }
