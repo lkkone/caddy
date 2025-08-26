@@ -30,4 +30,23 @@ caonmd.com {
 
 blog.caonmd.com {
   reverse_proxy 10.24.0.3:8090
+
+  header {
+    Content-Security-Policy "upgrade-insecure-requests"
+  }
+
+  log {
+    output file /data/access.log
+  }
+}
+
+monitor.caonmd.com {
+  reverse_proxy 10.24.0.3:3333
+  header {
+    Content-Security-Policy "upgrade-insecure-requests"
+  }
+
+  log {
+    output file /data/access.log
+  }
 }
