@@ -41,13 +41,11 @@ blog.caonmd.com {
 }
 
 status.caonmd.com {
-  handle /status/likaikai {
-    reverse_proxy 10.24.0.3:3001
-  }
+  # 只对根路径重定向到 /status/likaikai
+  redir / /status/likaikai 301
 
-  handle {
-    redir * /status/likaikai 301
-  }
+  # 其他所有路径都直接代理
+  reverse_proxy 10.24.0.3:3001
 
   header {
     Content-Security-Policy "upgrade-insecure-requests"
