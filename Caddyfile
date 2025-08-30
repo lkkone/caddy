@@ -41,7 +41,7 @@ blog.caonmd.com {
 }
 
 status.caonmd.com {
-  reverse_proxy 10.24.0.3:3001/
+  reverse_proxy 10.24.0.3:3001/status/likaikai
   header {
     Content-Security-Policy "upgrade-insecure-requests"
   }
@@ -52,7 +52,7 @@ status.caonmd.com {
 }
 
 wiki.caonmd.com {
-  reverse_proxy 10.24.0.3:3003/status/likaikai
+  reverse_proxy 10.24.0.3:3003
   header {
     Content-Security-Policy "upgrade-insecure-requests"
   }
