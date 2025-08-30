@@ -41,8 +41,12 @@ blog.caonmd.com {
 }
 
 status.caonmd.com {
-  redir * /status/likaikai 301
-  reverse_proxy 10.24.0.3:3001
+  handle /status/likaikai/* {
+    reverse_proxy 10.24.0.3:3001/*
+  }
+  handle {
+    redir * /status/likaikai 301
+  }
   header {
     Content-Security-Policy "upgrade-insecure-requests"
   }
