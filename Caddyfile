@@ -28,6 +28,17 @@ caonmd.com {
   }
 }
 
+twikoo.caonmd.com {
+  reverse_proxy 10.24.0.3:8060
+  header {
+    Content-Security-Policy "upgrade-insecure-requests"
+  }
+
+  log {
+    output file /data/access.log
+  }
+}
+
 blog.caonmd.com {
   reverse_proxy 10.24.0.3:8090
 
