@@ -40,11 +40,22 @@ twikoo.caonmd.com {
 }
 
 blog.caonmd.com {
-  # 重定向管理和登录页面到主页，避免暴露敏感页面
+  # 隐藏真实的管理和登录入口，重定向到主页
   @console path /console
   @login path /login
   redir @console / 301
   redir @login / 301
+
+  # 提供隐藏的管理入口，直接代理到后端
+  handle_path /likaikaiadmin* {
+    rewrite * /console{path}
+    reverse_proxy 10.24.0.3:8090
+  }
+
+  handle_path /likaikailogin* {
+    rewrite * /login{path}
+    reverse_proxy 10.24.0.3:8090
+  }
 
   reverse_proxy 10.24.0.3:8090
 
