@@ -47,12 +47,15 @@ blog.caonmd.com {
   redir @login / 301
 
   # 提供隐藏的管理入口，直接代理到后端
-  handle_path /likaikaiadmin* {
+  @likaikaiadmin path /likaikaiadmin*
+  @likaikailogin path /likaikailogin*
+  
+  handle @likaikaiadmin {
     rewrite * /console{path}
     reverse_proxy 10.24.0.3:8090
   }
 
-  handle_path /likaikailogin* {
+  handle @likaikailogin {
     rewrite * /login{path}
     reverse_proxy 10.24.0.3:8090
   }
