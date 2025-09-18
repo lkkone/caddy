@@ -1,0 +1,19 @@
+{
+	"sans": [
+		"status.caonmd.com"
+	],
+	"issuer_data": {
+		"url": "https://acme-v02.api.letsencrypt.org/acme/cert/0551486896070f1fef92a582547f64b45160",
+		"ca": "https://acme-v02.api.letsencrypt.org/directory",
+		"account": "https://acme-v02.api.letsencrypt.org/acme/acct/2618358697",
+		"renewal_info": {
+			"suggestedWindow": {
+				"start": "2025-10-28T08:43:09Z",
+				"end": "2025-10-30T03:53:58Z"
+			},
+			"_uniqueIdentifier": "rkie3IcdRKBv2qLlYHQEeMKcAIA.BVFIaJYHDx_vkqWCVH9ktFFg",
+			"_retryAfter": "2025-09-18T06:50:02.812582262Z",
+			"_selectedTime": "2025-10-30T03:40:35Z"
+		}
+	}
+}
